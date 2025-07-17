@@ -41,9 +41,9 @@ const run: any = (): void => {
         ]
       });
       if (answer === 'encode') {
-
+        // TODO: @fedtti - Add encode(); util.
       } else {
-
+        // TODO: @fedtti - Add decode(); util.
       }
     }, 1000);
   } catch (error) {
