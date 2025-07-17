@@ -1,28 +1,37 @@
 {
   "name": "@fedtti/jwt-cli",
   "version": "1.0.0",
-  "description": "",
+  "description": "CLI ",
+  "keywords": [],
   "homepage": "https://github.com/fedtti/jwt-cli#readme",
   "bugs": {
     "url": "https://github.com/fedtti/jwt-cli/issues"
+  },
+  "license": "MIT",
+  "author": "Federico Moretti <hello@federicomoretti.it> (https://federicomoretti.it/)",
+  "main": "bin/index.js",
+  "bin": {
+    "jwt-cli": "bin/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fedtti/jwt-cli.git"
   },
-  "license": "MIT",
-  "author": "",
-  "type": "module",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "@inquirer/prompts": "^7.6.0",
+    "chalk": "^5.4.1",
+    "figlet": "^1.8.2",
+    "jsonwebtoken": "^9.0.2",
+    "redis": "^5.6.0"
+  },
   "devDependencies": {
+    "@types/figlet": "^1.7.0",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.0.14",
     "typescript": "^5.8.3"
   },
-  "dependencies": {
-    "jsonwebtoken": "^9.0.2"
-  }
+  "type": "module"
 }
