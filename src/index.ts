@@ -3,11 +3,14 @@
 import chalk from 'chalk';
 import figlet from 'figlet';
 import { select } from '@inquirer/prompts';
+import { main as encoder } from './lib/utils/encode.js';
+import { main as decoder } from './lib/utils/decode.js';
 
 /**
  * Prints the package name in the console.
  */
 const init: any = (): void => {
+  // TODO: @fedtti - Add argv[] support to skip the printing.
   console.info(
     chalk.green(
       figlet.textSync('jwt-cli', {
@@ -23,11 +26,11 @@ const init: any = (): void => {
 const run: any = (): void => {
   console.clear();
   init();
-
   try {
     setTimeout(async (): Promise<void> => {
       console.clear();
-      const answer = await select({
+      // TODO: @fedtti - Add argv[] support to skip the selection.
+      const answer: string = await select({
         message: 'JSON Web Token (JWT) Debugger',
         choices: [
           {
@@ -41,9 +44,9 @@ const run: any = (): void => {
         ]
       });
       if (answer === 'encode') {
-        // TODO: @fedtti - Add encode(); util.
+        encoder();
       } else {
-        // TODO: @fedtti - Add decode(); util.
+        decoder();
       }
     }, 1000);
   } catch (error) {

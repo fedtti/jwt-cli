@@ -1,8 +1,10 @@
 {
   "name": "@fedtti/jwt-cli",
   "version": "1.0.0",
-  "description": "CLI ",
-  "keywords": [],
+  "description": "JSON Web Token (JWT) Debugger CLI",
+  "keywords": [
+    "fortheloveofcode"
+  ],
   "homepage": "https://github.com/fedtti/jwt-cli#readme",
   "bugs": {
     "url": "https://github.com/fedtti/jwt-cli/issues"
