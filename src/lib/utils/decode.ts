@@ -1,24 +1,52 @@
 import chalk from 'chalk';
-import { input } from '@inquirer/prompts';
+import { input, select } from '@inquirer/prompts';
+import { readFileSync } from 'fs';
 import * as jwt from 'jsonwebtoken';
 
-let options: jwt.VerifyOptions;
-
-/**
- * 
- */
-export const main: any = async (token?: string, secret?: jwt.Secret | jwt.PublicKey): Promise<null | jwt.Jwt | jwt.JwtPayload | string> => {
+export const main: any = async (token?: string, secret?: jwt.Secret, publicKey?: jwt.PublicKey, options?: jwt.VerifyOptions & { complete?: boolean }): Promise<null | jwt.Jwt | jwt.JwtPayload | string | undefined> => {
   try {
     if (!token) {
       token = await input({
         message: chalk.blue('JSON Web Token (JWT): ')
       });
     }
-    if (!secret) {
-      //
+    let secretOrPublicKey: jwt.Secret | jwt.PublicKey;
+    if (!secret && !publicKey) {
+      const selection = await select({
+        message: 'Secret or Public Key',
+        choices: [
+          {
+            name: 'Secret',
+            value: 'secret'
+          },
+          {
+            name: 'Public Key',
+            value: 'publicKey'
+          }
+        ]
+      });
+      if (selection === secret) {
+        secret = await input({
+          message: chalk.blue('Secret: ')
+        });
+        secretOrPublicKey = secret;
+      } else {
+        const publicKeyFile = await input({
+          message: chalk.blue('Public Key: ')
+        });
+        publicKey = readFileSync(publicKeyFile, 'utf-8');
+        secretOrPublicKey = publicKey;
+      }
+    } else {
+      if (!!secret && !publicKey) {
+        secretOrPublicKey = secret;
+      } else if (!secret && !!publicKey) {
+        secretOrPublicKey = publicKey;
+      } else {
+        throw new Error(''); // TODO: @fedtti - Add a proper error handling.
+      }
     }
-
-    return jwt.verify(token, secret);
+    return jwt.verify(token, secretOrPublicKey, options);
   } catch (error) {
     console.error(chalk.red.bold(`\n\r${error}`));
   }
