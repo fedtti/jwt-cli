@@ -7,12 +7,18 @@ let options: jwt.VerifyOptions;
 /**
  * 
  */
-export const main: any = async (): Promise<void> => {
+export const main: any = async (token?: string, secret?: jwt.Secret | jwt.PublicKey): Promise<null | jwt.Jwt | jwt.JwtPayload | string> => {
   try {
-    const token = await input({
-      message: chalk.blue('JSON Web Token (JWT): ')
-    });
+    if (!token) {
+      token = await input({
+        message: chalk.blue('JSON Web Token (JWT): ')
+      });
+    }
+    if (!secret) {
+      //
+    }
 
+    return jwt.verify(token, secret);
   } catch (error) {
     console.error(chalk.red.bold(`\n\r${error}`));
   }
