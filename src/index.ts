@@ -2,15 +2,14 @@
 
 import chalk from 'chalk';
 import figlet from 'figlet';
+import yargs, { Arguments } from 'yargs';
+import { hideBin } from 'yargs/helpers';
 import { select } from '@inquirer/prompts';
 import { main as encoder } from './lib/utils/encode.js';
 import { main as decoder } from './lib/utils/decode.js';
 
-/**
- * Prints the package name in the console.
- */
+
 const init: any = (): void => {
-  // TODO: @fedtti - Add argv[] support to skip the printing.
   console.info(
     chalk.green(
       figlet.textSync('jwt-cli', {
@@ -20,11 +19,11 @@ const init: any = (): void => {
   );
 };
 
-/**
- * 
- */
 const run: any = (): void => {
   console.clear();
+  if (!!process.argv.slice(2).length) {
+    process.exit(0);
+  }
   init();
   try {
     setTimeout(async (): Promise<void> => {
