@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "JSON Web Token (JWT) Debugger CLI",
   "keywords": [
+    "jwt",
     "fortheloveofcode"
   ],
   "homepage": "https://github.com/fedtti/jwt-cli#readme",
