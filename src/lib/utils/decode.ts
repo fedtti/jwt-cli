@@ -46,7 +46,7 @@ export const main: any = async (token?: string, secret?: jwt.Secret, publicKey?:
         throw new Error(''); // TODO: @fedtti - Add a proper error handling.
       }
     }
-    console.info(jwt.verify(token, secretOrPublicKey, options));
+    console.info(chalk.green.bold(`\n\r${JSON.stringify(jwt.verify(token, secretOrPublicKey, options))}`));
   } catch (error) {
     console.error(chalk.red.bold(`\n\r${error}`));
   }
