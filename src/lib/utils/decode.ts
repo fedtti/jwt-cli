@@ -29,7 +29,20 @@ export const main: any = async (token?: string, secret?: jwt.Secret, publicKey?:
         secret = await input({
           message: chalk.blue('Secret: ')
         });
-        secretOrPublicKey = secret;
+        const encoding = await select({
+          message: 'Encoding Format',
+          choices: [
+            {
+              name: 'UTF-8',
+              value: 'utf8'
+            },
+            {
+              name: 'Base64',
+              value: 'base64'
+            }
+          ]
+        });
+        secretOrPublicKey = encoding === 'base64' ? Buffer.from(secret, 'base64') : secret;
       } else {
         const publicKeyFile = await input({
           message: chalk.blue('Public Key: ')
