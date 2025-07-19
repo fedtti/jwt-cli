@@ -2,12 +2,11 @@
 
 import chalk from 'chalk';
 import figlet from 'figlet';
-import yargs, { Arguments } from 'yargs';
+import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { select } from '@inquirer/prompts';
 import { main as encoder } from './lib/utils/encode.js';
 import { main as decoder } from './lib/utils/decode.js';
-
 
 const init: any = (): void => {
   console.info(
@@ -22,13 +21,18 @@ const init: any = (): void => {
 const run: any = (): void => {
   console.clear();
   if (!!process.argv.slice(2).length) {
+    yargs(hideBin(process.argv))
+      .version('jwt-cli 2.0.0')
+      .alias('v', 'version')
+      .help('h')
+      .alias('h', 'help')
+      .argv;
     process.exit(0);
   }
   init();
   try {
     setTimeout(async (): Promise<void> => {
       console.clear();
-      // TODO: @fedtti - Add argv[] support to skip the selection.
       const answer: string = await select({
         message: 'JSON Web Token (JWT) Debugger',
         choices: [
