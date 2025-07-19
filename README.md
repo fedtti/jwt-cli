@@ -6,10 +6,6 @@ Inspired by Auth0’s **[JWT Debugger](https://jwt.io/)** using `jsonwebtoken` f
 
 ## Usage
 
-```bash
-cd jwt-cli/ && npm link
-```
-
 If you want to use the interactive mode, you can just:
 
 ```bash
