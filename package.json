@@ -20,8 +20,8 @@
     "url": "git+https://github.com/fedtti/jwt-cli.git"
   },
   "scripts": {
+    "clean": "shx rm -fr ./bin/* ./node_modules/*",
     "build": "tsc",
-    "clean": "shx rm -fr ./bin ./node_modules",
     "start": "node ./bin/index.js"
   },
   "dependencies": {

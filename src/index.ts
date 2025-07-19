@@ -53,3 +53,4 @@ const run: any = (): void => {
     console.error(chalk.red.bold(`\n\r${error}`));
   }
 };
+run();
