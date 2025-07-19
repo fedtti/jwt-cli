@@ -22,9 +22,10 @@ const run: any = (): void => {
   console.clear();
   if (!!process.argv.slice(2).length) {
     yargs(hideBin(process.argv))
-      .version('jwt-cli 2.0.0')
+
+      .version('jwt-cli 1.0.0')
       .alias('v', 'version')
-      .help('h')
+      .help()
       .alias('h', 'help')
       .argv;
     process.exit(0);
