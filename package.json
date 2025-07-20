@@ -12,9 +12,9 @@
   },
   "license": "MIT",
   "author": "Federico Moretti <hello@federicomoretti.it> (https://federicomoretti.it/)",
-  "main": "bin/index.js",
+  "main": "./bin/index.js",
   "bin": {
-    "jwt-cli": "bin/index.js"
+    "jwt-cli": "./bin/index.js"
   },
   "repository": {
     "type": "git",

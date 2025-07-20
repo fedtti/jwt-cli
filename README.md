@@ -13,6 +13,7 @@ jwt-cli
 ```
 
 Otherwise, you can skip it by adding a command and its options.
+You can see the full list of commands and options by appending either `-h` or `--help`.
 
 ## License
 

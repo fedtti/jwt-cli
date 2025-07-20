@@ -22,6 +22,7 @@ const run: any = (): void => {
   console.clear();
   if (!!process.argv.slice(2).length) {
     yargs(hideBin(process.argv))
+      .usage('Usage: jwt-cli <command> [options]')
 
       .version('jwt-cli 1.0.0')
       .alias('v', 'version')

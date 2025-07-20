@@ -56,8 +56,11 @@ export const main: any = async (token?: string, secret?: jwt.Secret, publicKey?:
       } else if (!secret && !!publicKey) {
         secretOrPublicKey = publicKey;
       } else {
-        throw new Error(''); // TODO: @fedtti - Add a proper error handling.
+        throw new Error(''); // TODO: @fedtti - Fix error handling.
       }
+    }
+    if (!!options) {
+      // TODO: @fedtti - Add options handling.
     }
     console.info(chalk.green.bold(`\n\r${JSON.stringify(jwt.verify(token, secretOrPublicKey, options))}`));
   } catch (error) {
