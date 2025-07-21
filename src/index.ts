@@ -25,7 +25,6 @@ const run: any = (): void => {
       .usage('Usage: jwt-cli <command> [options]')
 
       .version('jwt-cli 1.0.0')
-      .alias('v', 'version')
       .help()
       .alias('h', 'help')
       .argv;
