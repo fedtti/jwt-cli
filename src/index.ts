@@ -5,6 +5,7 @@ import figlet from 'figlet';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { select } from '@inquirer/prompts';
+import jwt from 'jsonwebtoken';
 import { main as encoder } from './lib/utils/encode.js';
 import { main as decoder } from './lib/utils/decode.js';
 
@@ -30,8 +31,11 @@ const run: any = (): void => {
 
         },
         async (argv) => {
-          await encoder(
 
+          await encoder(
+            argv.token,
+            argv.secret || argv.publicKey,
+            argv.options
           );
         }
       )
@@ -46,9 +50,22 @@ const run: any = (): void => {
             })
         },
         async (argv) => {
+          if (!argv.token) {
+            throw new Error('You must provide a JSON Web Token (JWT) to decode.');
+          }
+          let secretsOrPublicKey: jwt.Secret | jwt.PublicKey;
+          if (!!argv.secret || !!argv.publicKey) {
+            secretsOrPublicKey = !!argv.secret ? argv.secret as jwt.Secret : argv.publicKey as jwt.PublicKey;
+          } else {
+            throw new Error('You must provide either a secret or a public key.');
+          }
           await decoder(
-
+            argv.token,
+            secretsOrPublicKey,
+            argv.encoding || undefined,
+            argv.options || undefined
           );
+          process.exit(0);
         }
       )
       .version('jwt-cli 1.0.0')
