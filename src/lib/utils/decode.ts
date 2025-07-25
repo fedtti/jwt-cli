@@ -44,19 +44,19 @@ export const main: any = async (token?: string, secret?: jwt.Secret, encoding?: 
             ]
           });
         }
-        secretOrPublicKey = encoding === 'base64' ? Buffer.from(secret, 'base64') : secret;
+        secretOrPublicKey = encoding === 'base64' ? Buffer.from(secret, 'base64') as jwt.Secret : secret as jwt.Secret;
       } else {
         const publicKeyFile = await input({
           message: chalk.blue('Public Key: ')
         });
         publicKey = readFileSync(publicKeyFile, 'utf-8');
-        secretOrPublicKey = publicKey;
+        secretOrPublicKey = publicKey as jwt.PublicKey;
       }
     } else {
-      if (!!secret && !publicKey) {
-        secretOrPublicKey = secret;
-      } else if (!secret && !!publicKey) {
-        secretOrPublicKey = publicKey;
+      if (!!secret) {
+        secretOrPublicKey = secret as jwt.Secret;
+      } else if (!!publicKey) {
+        secretOrPublicKey = publicKey as jwt.PublicKey;
       } else {
         console.error(chalk.red.bold('You must provide either a secret or a public key.'));
         process.exit(1);

@@ -55,8 +55,14 @@ const run: any = (): void => {
             process.exit(1);
           }
           let secretsOrPublicKey: jwt.Secret | jwt.PublicKey;
+          let encoding: 'utf8' | 'base64' | undefined;
           if (!!argv.secret || !!argv.publicKey) {
-            secretsOrPublicKey = !!argv.secret ? argv.secret as jwt.Secret : argv.publicKey as jwt.PublicKey;
+            if (!!argv.secret) {
+              secretsOrPublicKey = argv.secret as jwt.Secret;
+              encoding = !!argv.encoding ? argv.encoding as 'utf8' | 'base64' : 'utf8';
+            } else {
+              secretsOrPublicKey = argv.publicKey as jwt.PublicKey;
+            }
           } else {
             console.error(chalk.red.bold('You must provide either a secret or a public key.'));
             process.exit(1);
@@ -64,7 +70,7 @@ const run: any = (): void => {
           await decoder(
             argv.token as string,
             secretsOrPublicKey,
-            argv.encoding as string || undefined,
+            encoding,
             argv.options as jwt.VerifyOptions || undefined
           );
           process.exit(0);
