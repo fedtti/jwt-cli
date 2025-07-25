@@ -51,13 +51,15 @@ const run: any = (): void => {
         },
         async (argv) => {
           if (!argv.token) {
-            throw new Error('You must provide a JSON Web Token (JWT) to decode.');
+            console.error(chalk.red.bold('You must provide a token to decode.'));
+            process.exit(1);
           }
           let secretsOrPublicKey: jwt.Secret | jwt.PublicKey;
           if (!!argv.secret || !!argv.publicKey) {
             secretsOrPublicKey = !!argv.secret ? argv.secret as jwt.Secret : argv.publicKey as jwt.PublicKey;
           } else {
-            throw new Error('You must provide either a secret or a public key.');
+            console.error(chalk.red.bold('You must provide either a secret or a public key.'));
+            process.exit(1);
           }
           await decoder(
             argv.token,
@@ -93,12 +95,15 @@ const run: any = (): void => {
       });
       if (answer === 'encode') {
         await encoder();
+        process.exit(0);
       } else {
         await decoder();
+        process.exit(0);
       }
     }, 1000);
   } catch (error) {
     console.error(chalk.red.bold(`\n\r${error}`));
+    process.exit(1);
   }
 };
 run();

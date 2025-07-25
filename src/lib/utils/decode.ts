@@ -56,7 +56,8 @@ export const main: any = async (token?: string, secret?: jwt.Secret, publicKey?:
       } else if (!secret && !!publicKey) {
         secretOrPublicKey = publicKey;
       } else {
-        throw new Error(''); // TODO: @fedtti - Fix error handling.
+        console.error(chalk.red.bold('You must provide either a secret or a public key.'));
+        process.exit(1);
       }
     }
     if (!!options) {
