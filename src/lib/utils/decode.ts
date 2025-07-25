@@ -3,7 +3,7 @@ import { input, select } from '@inquirer/prompts';
 import { readFileSync } from 'fs';
 import jwt from 'jsonwebtoken';
 
-export const main: any = async (token?: string, secret?: jwt.Secret, publicKey?: jwt.PublicKey, options?: jwt.VerifyOptions & { complete?: boolean }): Promise<void> => {
+export const main: any = async (token?: string, secret?: jwt.Secret, encoding?: 'utf8' | 'base64', publicKey?: jwt.PublicKey, options?: jwt.VerifyOptions & { complete?: boolean }): Promise<void> => {
   try {
     if (!token) {
       token = await input({
@@ -29,19 +29,21 @@ export const main: any = async (token?: string, secret?: jwt.Secret, publicKey?:
         secret = await input({
           message: chalk.blue('Secret: ')
         });
-        const encoding = await select({
-          message: 'Encoding Format',
-          choices: [
-            {
-              name: 'UTF-8',
-              value: 'utf8'
-            },
-            {
-              name: 'Base64',
-              value: 'base64'
-            }
-          ]
-        });
+        if (!encoding) {
+          await select({
+            message: 'Encoding Format',
+            choices: [
+              {
+                name: 'UTF-8',
+                value: 'utf8'
+              },
+              {
+                name: 'Base64',
+                value: 'base64'
+              }
+            ]
+          });
+        }
         secretOrPublicKey = encoding === 'base64' ? Buffer.from(secret, 'base64') : secret;
       } else {
         const publicKeyFile = await input({

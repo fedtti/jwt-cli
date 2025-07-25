@@ -15,6 +15,10 @@ jwt-cli
 Otherwise, you can skip it by adding a command and its argument(s) and/or option(s).
 You can see the full list of commands, arguments, and options by appending either `-h` or `--help`.
 
+### Encoder
+
+### Decoder
+
 ```bash
 jwt-cli decode --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30 --secret a-string-secret-at-least-256-bits-long
 ```

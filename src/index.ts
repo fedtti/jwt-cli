@@ -40,7 +40,7 @@ const run: any = (): void => {
         }
       )
       .command(
-        'decode [token] [secret] [publicKey] [options]',
+        'decode [token] [secret] [encoding] [publicKey] [options]',
         'JWT Decoder',
         (yargs) => {
           yargs
@@ -62,10 +62,10 @@ const run: any = (): void => {
             process.exit(1);
           }
           await decoder(
-            argv.token,
+            argv.token as string,
             secretsOrPublicKey,
-            argv.encoding || undefined,
-            argv.options || undefined
+            argv.encoding as string || undefined,
+            argv.options as jwt.VerifyOptions || undefined
           );
           process.exit(0);
         }
@@ -73,6 +73,7 @@ const run: any = (): void => {
       .version('jwt-cli 1.0.0')
       .help()
       .alias('h', 'help')
+      .alias('v', 'verbose')
       .argv;
     process.exit(0);
   }
