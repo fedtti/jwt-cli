@@ -12,8 +12,8 @@ If you want to use the interactive mode, you can just:
 jwt-cli
 ```
 
-Otherwise, you can skip it by adding a command and its options.
-You can see the full list of commands and options by appending either `-h` or `--help`.
+Otherwise, you can skip it by adding a command and its argument(s) and/or option(s).
+You can see the full list of commands, arguments, and options by appending either `-h` or `--help`.
 
 ## License
 

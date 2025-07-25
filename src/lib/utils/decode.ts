@@ -65,5 +65,6 @@ export const main: any = async (token?: string, secret?: jwt.Secret, publicKey?:
     console.info(chalk.green.bold(`\n\r${JSON.stringify(jwt.verify(token, secretOrPublicKey, options))}`));
   } catch (error) {
     console.error(chalk.red.bold(`\n\r${error}`));
+    process.exit(1);
   }
 };

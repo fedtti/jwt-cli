@@ -23,7 +23,34 @@ const run: any = (): void => {
   if (!!process.argv.slice(2).length) {
     yargs(hideBin(process.argv))
       .usage('Usage: jwt-cli <command> [options]')
+      .command(
+        'encode [token] [secret] [publicKey] [options]',
+        'JWT Encoder',
+        (yargs) => {
 
+        },
+        async (argv) => {
+          await encoder(
+
+          );
+        }
+      )
+      .command(
+        'decode [token] [secret] [publicKey] [options]',
+        'JWT Decoder',
+        (yargs) => {
+          yargs
+            .positional('token', {
+              describe: 'JSON Web Token (JWT) to decode',
+              type: 'string'
+            })
+        },
+        async (argv) => {
+          await decoder(
+
+          );
+        }
+      )
       .version('jwt-cli 1.0.0')
       .help()
       .alias('h', 'help')
@@ -48,9 +75,9 @@ const run: any = (): void => {
         ]
       });
       if (answer === 'encode') {
-        encoder();
+        await encoder();
       } else {
-        decoder();
+        await decoder();
       }
     }, 1000);
   } catch (error) {
