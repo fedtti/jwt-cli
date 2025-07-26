@@ -1,3 +1,5 @@
+![JSON Web Token (JWT)](./thumbnail.png)
+
 # jwt-cli
 
 Inspired by Auth0’s **[JWT Debugger](https://jwt.io/)** using `jsonwebtoken` for Node.js
